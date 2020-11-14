@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     addOneItem: function(todoItem) {
-      let obj = {completed: false, item: todoItem};
+      const obj = {completed: false, item: todoItem};
       localStorage.setItem(todoItem, JSON.stringify(obj));
       this.todoItems.push(obj);
     },
@@ -38,7 +38,7 @@ export default {
       this.todoItems.splice(index, 1);
     },
     toggleOneItem: function(index) {
-      let item = this.todoItems[index];
+      const item = this.todoItems[index];
       item.completed = !item.completed
       localStorage.setItem(item.item, JSON.stringify(item))
     },
