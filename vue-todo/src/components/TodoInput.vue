@@ -23,14 +23,14 @@ export default {
   components: {
     Modal
   },
-  data: function() {
+  data() {
     return {
       newTodo: "",
       showModal: false
     }
   },
   methods: {
-    addTodo: function() {
+    addTodo() {
       if (this.newTodo !== '') {
         this.$emit('addTodoItem', this.newTodo);
         this.clearInput();
@@ -38,7 +38,7 @@ export default {
         this.showModal = true;
       }
     },
-    clearInput: function() {
+    clearInput() {
       this.newTodo = "";
     },
   }
