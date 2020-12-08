@@ -22,6 +22,11 @@ export const store = new Vuex.Store({
     state: {
         todoItems: storage.fetch(),
     },
+    getters: {
+        storedTodoItems(state) {
+            return state.todoItems;
+        }
+    },
     mutations: {
         addOneItem(state, todoItem) {
             const obj = { completed: false, item: todoItem };
@@ -38,10 +43,14 @@ export const store = new Vuex.Store({
             item.completed = !item.completed
             localStorage.setItem(item.item, JSON.stringify(item))
         },
-        removeAllItem(state) {
+        removeAllItems(state) {
             localStorage.clear();
             state.todoItems = [];
         },
+    },
+    actions: {
+        // fetchTodoItems(context) {
+        //     context.commit()
+        // }
     }
 });
-// <p>{{ this.$store.getters.getNumber }}</p>

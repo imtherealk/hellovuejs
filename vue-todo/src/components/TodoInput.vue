@@ -1,6 +1,6 @@
 <template>
   <div class="inputBox shadow">
-    <input type="text" v-model="newTodo" v-on:keyup.enter="addTodo">
+    <BaseInput v-model="newTodo" v-on:enter="addTodo()"></BaseInput>
     <span class="addContainer" v-on:click="addTodo">
       <i class="fa fa-plus addBtn" aria-hidden="true"></i>
     </span>
@@ -18,10 +18,13 @@
 
 <script>
 import Modal from './common/Modal.vue';
+import BaseInput from './common/BaseInput.vue';
+import { mapMutations } from 'vuex';
 
 export default {
   components: {
-    Modal
+    Modal,
+    BaseInput
   },
   data() {
     return {
@@ -30,18 +33,20 @@ export default {
     }
   },
   methods: {
+    ...mapMutations(['addOneItem']),
     addTodo() {
-      if (this.newTodo !== '') {
-        const text = this.newTodo.trim();
-        this.$store.commit('addOneItem', text);
-        this.clearInput();
-      } else {
+      if (this.newTodo === '') {
         this.showModal = true;
+      } else {
+        const text = this.newTodo.trim();
+        this.addOneItem(text);
+        this.showModal = false; 
+        this.clearInput();
       }
     },
     clearInput() {
       this.newTodo = "";
-    },
+    }
   }
 }
 </script>
